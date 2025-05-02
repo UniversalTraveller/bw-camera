@@ -1,9 +1,14 @@
-import { IconButton } from 'react-native-paper'
+import { useRef } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera'
+import { Camera, useCameraDevice, useCameraPermission, PhotoFile } from 'react-native-vision-camera'
+import ShutterButton from './ShutterButton'
 
 const CameraScreen = () => {
   const { hasPermission, requestPermission } = useCameraPermission()
+
+  const camera = useRef<Camera>(null)
+
+  const photos: PhotoFile[] = []
 
   if (!hasPermission) {
     requestPermission()
@@ -13,6 +18,15 @@ const CameraScreen = () => {
 
   if (cameraDevice === undefined) {
     return
+  }
+
+  const onShutterPress = async () => {
+    const photo = await camera.current?.takePhoto()
+    if (photo) {
+      photos.push(photo)
+    }
+
+    console.log(JSON.stringify(photos, null, 2))
   }
 
   return (
@@ -25,20 +39,14 @@ const CameraScreen = () => {
       }}
     >
       <Camera
+        ref={camera}
         style={{ flex: 1, width: '100%', backgroundColor: 'red' }}
         device={cameraDevice}
         isActive={true}
         resizeMode="contain"
+        photo={true}
       />
-      <IconButton
-        icon="camera"
-        size={48}
-        onPress={() => {
-          console.log('pressed')
-        }}
-        mode="contained-tonal"
-        style={{ marginBottom: 60 }}
-      />
+      <ShutterButton onShutterPress={onShutterPress} />
     </SafeAreaView>
   )
 }
