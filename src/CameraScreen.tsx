@@ -1,6 +1,8 @@
 import { useRef } from 'react'
+
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Camera, useCameraDevice, useCameraPermission, PhotoFile } from 'react-native-vision-camera'
+
 import ShutterButton from './ShutterButton'
 
 const CameraScreen = () => {
