@@ -37,8 +37,8 @@ yarn-error.*
 *.tsbuildinfo
 
 # mobile os
-android
-ios
+android/
+ios/
 
 # vscode
 .vscode/
