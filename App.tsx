@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera'
 
 export default function App() {
@@ -8,11 +8,28 @@ export default function App() {
     requestPermission()
   }
 
-  const camera = useCameraDevice('back')
+  const cameraDevice = useCameraDevice('back')
 
-  if (camera === undefined) {
+  if (cameraDevice === undefined) {
     return
   }
 
-  return <Camera style={StyleSheet.absoluteFill} device={camera} isActive={true} />
+  return (
+    <View style={styles.cameraContainer}>
+      <Camera style={styles.camera} device={cameraDevice} isActive={true} />
+    </View>
+  )
 }
+
+const styles = StyleSheet.create({
+  cameraContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black'
+  },
+  camera: {
+    width: '100%',
+    aspectRatio: 3 / 4
+  }
+})
