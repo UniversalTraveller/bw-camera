@@ -15,8 +15,6 @@ const CameraScreen = () => {
 
   const camera = useRef<Camera>(null)
 
-  const photos: PhotoFile[] = []
-
   if (!hasCameraPermission) {
     requestCameraPermission()
   }
@@ -34,8 +32,6 @@ const CameraScreen = () => {
       return
     }
 
-    photos.push(photo)
-
     if (mediaLibraryPermissionResponse?.status !== 'granted') {
       await requestMediaLibraryPermission()
     }
@@ -43,8 +39,6 @@ const CameraScreen = () => {
     if (mediaLibraryPermissionResponse?.status === 'granted') {
       await MediaLibrary.saveToLibraryAsync(photo.path)
     }
-
-    console.log(JSON.stringify(photos, null, 2))
   }
 
   return (
