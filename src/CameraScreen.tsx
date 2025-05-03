@@ -5,8 +5,13 @@ import { Camera, useCameraDevice, useCameraPermission, PhotoFile } from 'react-n
 import * as MediaLibrary from 'expo-media-library'
 
 import ShutterButton from './ShutterButton'
+import { useAppState } from '@react-native-community/hooks'
 
 const CameraScreen = () => {
+  const appState = useAppState()
+
+  const isActive = appState === 'active'
+
   const { hasPermission: hasCameraPermission, requestPermission: requestCameraPermission } =
     useCameraPermission()
 
@@ -54,7 +59,7 @@ const CameraScreen = () => {
         ref={camera}
         style={{ flex: 1, width: '100%', backgroundColor: 'red' }}
         device={cameraDevice}
-        isActive={true}
+        isActive={isActive}
         resizeMode="contain"
         photo={true}
       />
