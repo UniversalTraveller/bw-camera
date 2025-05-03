@@ -2,18 +2,21 @@ import { useRef } from 'react'
 
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Camera, useCameraDevice, useCameraPermission, PhotoFile } from 'react-native-vision-camera'
+import * as MediaLibrary from 'expo-media-library'
 
 import ShutterButton from './ShutterButton'
 
 const CameraScreen = () => {
-  const { hasPermission, requestPermission } = useCameraPermission()
+  const { hasPermission: hasCameraPermission, requestPermission: requestCameraPermission } =
+    useCameraPermission()
+
+  const [mediaLibraryPermissionResponse, requestMediaLibraryPermission] =
+    MediaLibrary.usePermissions({ granularPermissions: ['photo'] })
 
   const camera = useRef<Camera>(null)
 
-  const photos: PhotoFile[] = []
-
-  if (!hasPermission) {
-    requestPermission()
+  if (!hasCameraPermission) {
+    requestCameraPermission()
   }
 
   const cameraDevice = useCameraDevice('back')
@@ -24,11 +27,18 @@ const CameraScreen = () => {
 
   const onShutterPress = async () => {
     const photo = await camera.current?.takePhoto()
-    if (photo) {
-      photos.push(photo)
+
+    if (!photo) {
+      return
     }
 
-    console.log(JSON.stringify(photos, null, 2))
+    if (mediaLibraryPermissionResponse?.status !== 'granted') {
+      await requestMediaLibraryPermission()
+    }
+
+    if (mediaLibraryPermissionResponse?.status === 'granted') {
+      await MediaLibrary.saveToLibraryAsync(photo.path)
+    }
   }
 
   return (
