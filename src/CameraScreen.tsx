@@ -10,7 +10,7 @@ import { useAppState } from '@react-native-community/hooks'
 import ShutterButton from './ShutterButton'
 
 const CameraScreen = () => {
-  const [showMirrorOverlay, setShowMirrorOverlay] = useState(false)
+  const [isTakingPicture, setIsTakingPicture] = useState(false)
 
   const appState = useAppState()
 
@@ -35,11 +35,11 @@ const CameraScreen = () => {
   }
 
   const onShutterPress = async () => {
-    setShowMirrorOverlay(true)
+    setIsTakingPicture(true)
 
     const photo = await camera.current?.takePhoto()
 
-    setShowMirrorOverlay(false)
+    setIsTakingPicture(false)
 
     if (!photo) {
       return
@@ -73,7 +73,7 @@ const CameraScreen = () => {
           photo={true}
         />
 
-        {showMirrorOverlay && (
+        {isTakingPicture && (
           <View
             style={{
               position: 'absolute',
@@ -88,7 +88,7 @@ const CameraScreen = () => {
           />
         )}
       </View>
-      <ShutterButton onShutterPress={onShutterPress} />
+      <ShutterButton onShutterPress={onShutterPress} isPressed={isTakingPicture} />
     </SafeAreaView>
   )
 }

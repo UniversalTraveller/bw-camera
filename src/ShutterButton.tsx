@@ -1,16 +1,14 @@
-import { useState } from 'react'
-
 import { IconButton } from 'react-native-paper'
 
-const ShutterButton = ({ onShutterPress }: { onShutterPress: () => Promise<void> }) => {
-  const [isPressed, setIsPressed] = useState(false)
-
+const ShutterButton = ({
+  onShutterPress,
+  isPressed
+}: {
+  onShutterPress: () => Promise<void>
+  isPressed: boolean
+}) => {
   const onPress = async () => {
-    setIsPressed(true)
-
     await onShutterPress()
-
-    setIsPressed(false)
   }
 
   return (
