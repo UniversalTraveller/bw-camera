@@ -37,7 +37,7 @@ const CameraScreen = () => {
   const onShutterPress = async () => {
     setIsTakingPicture(true)
 
-    const photo = await camera.current?.takePhoto()
+    const photo = await camera.current?.takePhoto({ enableShutterSound: true })
 
     setIsTakingPicture(false)
 
