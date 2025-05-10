@@ -1,14 +1,18 @@
 import { Stack } from 'expo-router'
-import { PaperProvider } from 'react-native-paper'
+import { PaperProvider, useTheme } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
+import { appTheme, useAppTheme } from '../theme/appTheme'
+
 export default function Layout() {
+  const { colors } = useAppTheme()
+
   return (
     <SafeAreaProvider>
-      <PaperProvider>
+      <PaperProvider theme={appTheme}>
         <Stack
           screenOptions={{
-            contentStyle: { backgroundColor: 'black' }
+            contentStyle: { backgroundColor: `${colors.background}` }
           }}
         >
           <Stack.Screen
@@ -17,17 +21,17 @@ export default function Layout() {
               headerShown: false
             }}
           />
+
           <Stack.Screen
             name="settings"
             options={{
               title: 'Settings',
               headerStyle: {
-                backgroundColor: '#000'
+                backgroundColor: colors.background
               },
-              headerTintColor: '#fff',
+              headerTintColor: colors.onSurface,
               headerTitleStyle: {
-                fontWeight: 'bold',
-                color: '#fff'
+                color: colors.onSurface
               }
             }}
           />
