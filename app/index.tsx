@@ -7,7 +7,9 @@ import { Camera, useCameraDevice, useCameraPermission } from 'react-native-visio
 import * as MediaLibrary from 'expo-media-library'
 import { useAppState } from '@react-native-community/hooks'
 
-import ShutterButton from './ShutterButton'
+import ShutterButton from '../components/ShutterButton'
+import NavigationButton from '../components/NavigationButton'
+import { router } from 'expo-router'
 
 const CameraScreen = () => {
   const [isTakingPicture, setIsTakingPicture] = useState(false)
@@ -88,7 +90,25 @@ const CameraScreen = () => {
           />
         )}
       </View>
-      <ShutterButton onShutterPress={onShutterPress} isPressed={isTakingPicture} />
+
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          width: '100%',
+          marginBottom: 60
+        }}
+      >
+        <NavigationButton
+          onPress={() => console.log('Gallery not implemented yet')}
+          icon="image-album"
+        />
+
+        <ShutterButton onShutterPress={onShutterPress} isPressed={isTakingPicture} />
+
+        <NavigationButton onPress={() => router.push('/settings')} icon="cog" />
+      </View>
     </SafeAreaView>
   )
 }
