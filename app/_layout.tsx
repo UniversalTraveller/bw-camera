@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router'
-import { PaperProvider, useTheme } from 'react-native-paper'
+import { PaperProvider } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { appTheme, useAppTheme } from '../theme/appTheme'
@@ -12,7 +12,7 @@ export default function Layout() {
       <PaperProvider theme={appTheme}>
         <Stack
           screenOptions={{
-            contentStyle: { backgroundColor: `${colors.background}` }
+            contentStyle: { backgroundColor: colors.background }
           }}
         >
           <Stack.Screen
