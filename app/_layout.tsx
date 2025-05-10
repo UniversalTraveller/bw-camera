@@ -2,10 +2,10 @@ import { Stack } from 'expo-router'
 import { PaperProvider } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
-const Layout = () => {
+export default function Layout() {
   return (
-    <PaperProvider>
-      <SafeAreaProvider>
+    <SafeAreaProvider>
+      <PaperProvider>
         <Stack>
           <Stack.Screen
             name="index"
@@ -13,11 +13,22 @@ const Layout = () => {
               headerShown: false
             }}
           />
-          <Stack.Screen name="settings" />
+          <Stack.Screen
+            name="settings"
+            options={{
+              title: 'Settings',
+              headerStyle: {
+                backgroundColor: '#000'
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+                color: '#fff'
+              }
+            }}
+          />
         </Stack>
-      </SafeAreaProvider>
-    </PaperProvider>
+      </PaperProvider>
+    </SafeAreaProvider>
   )
 }
-
-export default Layout
