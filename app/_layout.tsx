@@ -6,7 +6,11 @@ export default function Layout() {
   return (
     <SafeAreaProvider>
       <PaperProvider>
-        <Stack>
+        <Stack
+          screenOptions={{
+            contentStyle: { backgroundColor: 'black' }
+          }}
+        >
           <Stack.Screen
             name="index"
             options={{
