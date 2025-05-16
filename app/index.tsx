@@ -2,16 +2,16 @@ import { useRef, useState } from 'react'
 
 import { View } from 'react-native'
 
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera'
 import * as MediaLibrary from 'expo-media-library'
 import { useAppState } from '@react-native-community/hooks'
 import { router } from 'expo-router'
 
-import ShutterButton from '../components/ShutterButton'
-import NavigationButton from '../components/NavigationButton'
 import { useAppTheme } from '../theme/appTheme'
 import { useAppSelector } from '../store/hooks'
+import ShutterButton from '../components/ShutterButton'
+import NavigationButton from '../components/NavigationButton'
+import ScreenView from '../components/ScreenView'
 
 const CameraScreen = () => {
   const [isTakingPicture, setIsTakingPicture] = useState(false)
@@ -65,7 +65,7 @@ const CameraScreen = () => {
   }
 
   return (
-    <SafeAreaView
+    <ScreenView
       style={{
         backgroundColor: colors.background,
         flex: 1,
@@ -117,7 +117,7 @@ const CameraScreen = () => {
 
         <NavigationButton onPress={() => router.push('/settings')} icon="cog" />
       </View>
-    </SafeAreaView>
+    </ScreenView>
   )
 }
 

@@ -1,16 +1,21 @@
 import { List, Switch } from 'react-native-paper'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { setPlayShutterSound, setBlackViewfinderWhenShutterPressed } from '../store/settingsSlice'
+import {
+  setPlayShutterSound,
+  setBlackViewfinderWhenShutterPressed,
+  setHideStatusBar
+} from '../store/settingsSlice'
+import ScreenView from '../components/ScreenView'
 
 const SettingsScreen = () => {
   const dispatch = useAppDispatch()
-  const { playShutterSound, blackViewfinderWhenShutterPressed } =
-    useAppSelector(state => state.settings)
+  const { playShutterSound, blackViewfinderWhenShutterPressed, hideStatusBar } = useAppSelector(
+    state => state.settings
+  )
 
   return (
-    <SafeAreaView>
+    <ScreenView>
       <List.Item
         title="Play shutter sound"
         description="Play a short click sound when the shutter is pressed."
@@ -36,7 +41,20 @@ const SettingsScreen = () => {
           />
         )}
       />
-    </SafeAreaView>
+
+      <List.Item
+        title="Hide status bar"
+        description="Hide the status bar for an undestracted experience."
+        right={() => (
+          <Switch
+            value={hideStatusBar}
+            onValueChange={(value: boolean) => {
+              dispatch(setHideStatusBar(value))
+            }}
+          />
+        )}
+      />
+    </ScreenView>
   )
 }
 
