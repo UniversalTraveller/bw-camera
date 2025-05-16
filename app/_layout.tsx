@@ -10,6 +10,14 @@ import { store, persistor } from '../store'
 export default function Layout() {
   const { colors } = useAppTheme()
 
+  const defaultScreenOptions = {
+    headerStyle: {
+      backgroundColor: colors.background
+    },
+    headerTintColor: colors.onSurface,
+    headerTitleStyle: { color: colors.onSurface }
+  }
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -29,16 +37,12 @@ export default function Layout() {
 
               <Stack.Screen
                 name="settings"
-                options={{
-                  title: 'Settings',
-                  headerStyle: {
-                    backgroundColor: colors.background
-                  },
-                  headerTintColor: colors.onSurface,
-                  headerTitleStyle: {
-                    color: colors.onSurface
-                  }
-                }}
+                options={{ ...defaultScreenOptions, title: 'Settings' }}
+              />
+
+              <Stack.Screen
+                name="gallery"
+                options={{ ...defaultScreenOptions, title: 'Photos' }}
               />
             </Stack>
           </PaperProvider>

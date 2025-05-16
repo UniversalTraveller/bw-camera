@@ -108,10 +108,7 @@ const CameraScreen = () => {
           marginBottom: 60
         }}
       >
-        <NavigationButton
-          onPress={() => console.log('Gallery not implemented yet')}
-          icon="image-album"
-        />
+        <NavigationButton onPress={() => router.push('/gallery')} icon="image-album" />
 
         <ShutterButton onShutterPress={onShutterPress} isPressed={isTakingPicture} />
 
