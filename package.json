@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-native-community/hooks": "^100.1.0",
+    "@reduxjs/toolkit": "^2.8.2",
     "expo": "53.0.9",
     "expo-constants": "~17.1.6",
     "expo-linking": "~7.1.4",
@@ -21,7 +22,8 @@
     "react-native-paper": "^5.14.0",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.10.0",
-    "react-native-vision-camera": "^4.6.4"
+    "react-native-vision-camera": "^4.6.4",
+    "react-redux": "^9.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

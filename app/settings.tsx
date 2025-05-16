@@ -1,12 +1,13 @@
-import { useState } from 'react'
-
 import { List, Switch } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-const SettingsScreen = () => {
-  const [playShutterSound, setPlayShutterSound] = useState(true)
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { setPlayShutterSound, setBlackViewfinderWhenShutterPressed } from '../store/settingsSlice'
 
-  const [blackScreenWhenShutterPressed, setBlackScreenWhenShutterPressed] = useState(true)
+const SettingsScreen = () => {
+  const dispatch = useAppDispatch()
+  const { playShutterSound, blackViewfinderWhenShutterPressed } =
+    useAppSelector(state => state.settings)
 
   return (
     <SafeAreaView>
@@ -16,7 +17,9 @@ const SettingsScreen = () => {
         right={() => (
           <Switch
             value={playShutterSound}
-            onValueChange={() => setPlayShutterSound(!playShutterSound)}
+            onValueChange={(value: boolean) => {
+              dispatch(setPlayShutterSound(value))
+            }}
           />
         )}
       />
@@ -26,12 +29,15 @@ const SettingsScreen = () => {
         description="Let the viewfinder go black when taking a photo."
         right={() => (
           <Switch
-            value={blackScreenWhenShutterPressed}
-            onValueChange={() => setBlackScreenWhenShutterPressed(!blackScreenWhenShutterPressed)}
+            value={blackViewfinderWhenShutterPressed}
+            onValueChange={(value: boolean) => {
+              dispatch(setBlackViewfinderWhenShutterPressed(value))
+            }}
           />
         )}
       />
     </SafeAreaView>
   )
 }
+
 export default SettingsScreen

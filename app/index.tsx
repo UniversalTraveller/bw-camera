@@ -11,6 +11,7 @@ import { router } from 'expo-router'
 import ShutterButton from '../components/ShutterButton'
 import NavigationButton from '../components/NavigationButton'
 import { useAppTheme } from '../theme/appTheme'
+import { useAppSelector } from '../store/hooks'
 
 const CameraScreen = () => {
   const [isTakingPicture, setIsTakingPicture] = useState(false)
@@ -20,6 +21,10 @@ const CameraScreen = () => {
   const { colors } = useAppTheme()
 
   const isActive = appState === 'active'
+
+  const { playShutterSound, blackViewfinderWhenShutterPressed } = useAppSelector(
+    state => state.settings
+  )
 
   const { hasPermission: hasCameraPermission, requestPermission: requestCameraPermission } =
     useCameraPermission()
@@ -42,7 +47,7 @@ const CameraScreen = () => {
   const onShutterPress = async () => {
     setIsTakingPicture(true)
 
-    const photo = await camera.current?.takePhoto({ enableShutterSound: true })
+    const photo = await camera.current?.takePhoto({ enableShutterSound: playShutterSound })
 
     setIsTakingPicture(false)
 
@@ -78,7 +83,7 @@ const CameraScreen = () => {
           photo={true}
         />
 
-        {isTakingPicture && (
+        {isTakingPicture && blackViewfinderWhenShutterPressed && (
           <View
             style={{
               position: 'absolute',
