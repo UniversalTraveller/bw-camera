@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 type SettingsState = {
   playShutterSound: boolean
   blackViewfinderWhenShutterPressed: boolean
+  hideStatusBar: boolean
 }
 
 const initialState: SettingsState = {
   playShutterSound: true,
-  blackViewfinderWhenShutterPressed: true
+  blackViewfinderWhenShutterPressed: true,
+  hideStatusBar: true
 }
 
 const settingsSlice = createSlice({
@@ -19,9 +21,13 @@ const settingsSlice = createSlice({
     },
     setBlackViewfinderWhenShutterPressed: (state, action: PayloadAction<boolean>) => {
       state.blackViewfinderWhenShutterPressed = action.payload
+    },
+    setHideStatusBar: (state, action: PayloadAction<boolean>) => {
+      state.hideStatusBar = action.payload
     }
   }
 })
 
-export const { setPlayShutterSound, setBlackViewfinderWhenShutterPressed } = settingsSlice.actions
+export const { setPlayShutterSound, setBlackViewfinderWhenShutterPressed, setHideStatusBar } =
+  settingsSlice.actions
 export default settingsSlice.reducer
