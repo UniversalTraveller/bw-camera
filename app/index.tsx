@@ -6,13 +6,18 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera'
 import * as MediaLibrary from 'expo-media-library'
 import { useAppState } from '@react-native-community/hooks'
+import { router } from 'expo-router'
 
-import ShutterButton from './ShutterButton'
+import ShutterButton from '../components/ShutterButton'
+import NavigationButton from '../components/NavigationButton'
+import { useAppTheme } from '../theme/appTheme'
 
 const CameraScreen = () => {
   const [isTakingPicture, setIsTakingPicture] = useState(false)
 
   const appState = useAppState()
+
+  const { colors } = useAppTheme()
 
   const isActive = appState === 'active'
 
@@ -57,7 +62,7 @@ const CameraScreen = () => {
   return (
     <SafeAreaView
       style={{
-        backgroundColor: 'black',
+        backgroundColor: colors.background,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
@@ -81,14 +86,32 @@ const CameraScreen = () => {
               right: 0,
               top: 0,
               bottom: 0,
-              backgroundColor: 'black',
+              backgroundColor: colors.background,
               zIndex: 10
             }}
             pointerEvents="none"
           />
         )}
       </View>
-      <ShutterButton onShutterPress={onShutterPress} isPressed={isTakingPicture} />
+
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          width: '100%',
+          marginBottom: 60
+        }}
+      >
+        <NavigationButton
+          onPress={() => console.log('Gallery not implemented yet')}
+          icon="image-album"
+        />
+
+        <ShutterButton onShutterPress={onShutterPress} isPressed={isTakingPicture} />
+
+        <NavigationButton onPress={() => router.push('/settings')} icon="cog" />
+      </View>
     </SafeAreaView>
   )
 }

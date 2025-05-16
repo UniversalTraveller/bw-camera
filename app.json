@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "bw-camera",
+    "scheme": "bwcamera",
     "slug": "bw-camera",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -41,7 +42,8 @@
         {
           "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera."
         }
-      ]
+      ],
+      "expo-router"
     ]
   }
 }

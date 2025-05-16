@@ -17,7 +17,6 @@ const ShutterButton = ({
       size={48}
       onPress={onPress}
       mode="contained-tonal"
-      style={{ marginBottom: 60 }}
       selected={isPressed}
     />
   )
