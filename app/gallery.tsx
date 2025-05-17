@@ -46,7 +46,7 @@ const GalleryScreen = () => {
       setEndCursor(newEndCursor)
       setHasNextPage(newHasNextPage)
     } catch (error) {
-      console.error('Error loading photos:', error)
+      setIsErros(true)
     } finally {
       setIsLoading(false)
     }
