@@ -70,10 +70,16 @@ const GalleryScreen = () => {
 
   if (isError) {
     return (
-      <ScreenView
-        style={{ alignItems: 'center', justifyContent: 'center', gap: 8, height: '100%' }}
-      >
+      <ScreenView style={{ alignItems: 'center', justifyContent: 'center', height: '100%' }}>
         <Text variant={'titleLarge'}>Error loading photos</Text>
+      </ScreenView>
+    )
+  }
+
+  if (photos.length === 0) {
+    return (
+      <ScreenView style={{ alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+        <Text variant={'titleLarge'}>Nothing there to display yet</Text>
       </ScreenView>
     )
   }
