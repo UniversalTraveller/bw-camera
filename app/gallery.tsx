@@ -4,7 +4,6 @@ import { View, FlatList, Image, Dimensions } from 'react-native'
 
 import * as MediaLibrary from 'expo-media-library'
 
-import { useAppTheme } from '../theme/appTheme'
 import ScreenView from '../components/ScreenView'
 import { ActivityIndicator, Text } from 'react-native-paper'
 
@@ -20,7 +19,6 @@ const GalleryScreen = () => {
   const [endCursor, setEndCursor] = useState<string>()
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsErros] = useState(false)
-  const { colors } = useAppTheme()
 
   const [mediaLibraryPermissionResponse, requestMediaLibraryPermission] =
     useMediaLibraryPermissions()
@@ -65,8 +63,7 @@ const GalleryScreen = () => {
       source={{ uri: item.uri }}
       style={{
         width: tileSize,
-        height: tileSize,
-        backgroundColor: colors.surface
+        height: tileSize
       }}
     />
   )

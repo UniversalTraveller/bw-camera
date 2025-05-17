@@ -6,6 +6,7 @@ import { Camera, useCameraDevice, useCameraPermission } from 'react-native-visio
 import * as MediaLibrary from 'expo-media-library'
 import { useAppState } from '@react-native-community/hooks'
 import { router } from 'expo-router'
+import { useIsFocused } from '@react-navigation/native'
 
 import { useAppTheme } from '../theme/appTheme'
 import { useAppSelector } from '../store/hooks'
@@ -18,10 +19,12 @@ const CameraScreen = () => {
   const [isTakingPicture, setIsTakingPicture] = useState(false)
 
   const appState = useAppState()
+  
+  const isFocused = useIsFocused()
 
   const { colors } = useAppTheme()
 
-  const isActive = appState === 'active'
+  const isActive = appState === 'active' && isFocused
 
   const { playShutterSound, blackViewfinderWhenShutterPressed } = useAppSelector(
     state => state.settings
