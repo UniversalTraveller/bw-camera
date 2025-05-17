@@ -4,8 +4,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
+import { persistor, store } from '../store'
 import { appTheme, useAppTheme } from '../theme/appTheme'
-import { store, persistor } from '../store'
 
 export default function Layout() {
   const { colors } = useAppTheme()
@@ -40,10 +40,7 @@ export default function Layout() {
                 options={{ ...defaultScreenOptions, title: 'Settings' }}
               />
 
-              <Stack.Screen
-                name="gallery"
-                options={{ ...defaultScreenOptions, title: 'Photos' }}
-              />
+              <Stack.Screen name="gallery" options={{ ...defaultScreenOptions, title: 'Photos' }} />
             </Stack>
           </PaperProvider>
         </SafeAreaProvider>

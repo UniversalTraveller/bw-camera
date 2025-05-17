@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { SafeAreaView, StyleProp, ViewStyle } from 'react-native'
+
 import { StatusBar } from 'expo-status-bar'
 
 import { useAppSelector } from '../store/hooks'

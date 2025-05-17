@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { IconButton } from 'react-native-paper'
+
 import { useIsFocused } from '@react-navigation/native'
 
 const NavigationButton = ({ onPress, icon }: { onPress: () => void; icon: string }) => {
