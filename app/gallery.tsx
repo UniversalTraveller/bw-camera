@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 
-import { View, FlatList, Image, Dimensions } from 'react-native'
+import { Dimensions, FlatList, Image, View } from 'react-native'
 
 import * as MediaLibrary from 'expo-media-library'
-
-import ScreenView from '../components/ScreenView'
 import { ActivityIndicator, Text } from 'react-native-paper'
 
+import ScreenView from '../components/ScreenView'
 import useMediaLibraryPermissions from '../hooks/useMediaLibraryPermissions'
 
 const { width } = Dimensions.get('window')

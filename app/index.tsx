@@ -2,24 +2,25 @@ import { useRef, useState } from 'react'
 
 import { View } from 'react-native'
 
-import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera'
 import * as MediaLibrary from 'expo-media-library'
-import { useAppState } from '@react-native-community/hooks'
 import { router } from 'expo-router'
+import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera'
+
+import { useAppState } from '@react-native-community/hooks'
 import { useIsFocused } from '@react-navigation/native'
 
-import { useAppTheme } from '../theme/appTheme'
-import { useAppSelector } from '../store/hooks'
-import useMediaLibraryPermissions from '../hooks/useMediaLibraryPermissions'
-import ShutterButton from '../components/ShutterButton'
 import NavigationButton from '../components/NavigationButton'
 import ScreenView from '../components/ScreenView'
+import ShutterButton from '../components/ShutterButton'
+import useMediaLibraryPermissions from '../hooks/useMediaLibraryPermissions'
+import { useAppSelector } from '../store/hooks'
+import { useAppTheme } from '../theme/appTheme'
 
 const CameraScreen = () => {
   const [isTakingPicture, setIsTakingPicture] = useState(false)
 
   const appState = useAppState()
-  
+
   const isFocused = useIsFocused()
 
   const { colors } = useAppTheme()

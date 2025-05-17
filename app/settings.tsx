@@ -1,12 +1,12 @@
 import { List, Switch } from 'react-native-paper'
 
+import ScreenView from '../components/ScreenView'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import {
-  setPlayShutterSound,
   setBlackViewfinderWhenShutterPressed,
-  setHideStatusBar
+  setHideStatusBar,
+  setPlayShutterSound
 } from '../store/settingsSlice'
-import ScreenView from '../components/ScreenView'
 
 const SettingsScreen = () => {
   const dispatch = useAppDispatch()
