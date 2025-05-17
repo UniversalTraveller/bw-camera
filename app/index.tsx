@@ -6,9 +6,11 @@ import { Camera, useCameraDevice, useCameraPermission } from 'react-native-visio
 import * as MediaLibrary from 'expo-media-library'
 import { useAppState } from '@react-native-community/hooks'
 import { router } from 'expo-router'
+import { useIsFocused } from '@react-navigation/native'
 
 import { useAppTheme } from '../theme/appTheme'
 import { useAppSelector } from '../store/hooks'
+import useMediaLibraryPermissions from '../hooks/useMediaLibraryPermissions'
 import ShutterButton from '../components/ShutterButton'
 import NavigationButton from '../components/NavigationButton'
 import ScreenView from '../components/ScreenView'
@@ -17,10 +19,12 @@ const CameraScreen = () => {
   const [isTakingPicture, setIsTakingPicture] = useState(false)
 
   const appState = useAppState()
+  
+  const isFocused = useIsFocused()
 
   const { colors } = useAppTheme()
 
-  const isActive = appState === 'active'
+  const isActive = appState === 'active' && isFocused
 
   const { playShutterSound, blackViewfinderWhenShutterPressed } = useAppSelector(
     state => state.settings
@@ -30,7 +34,7 @@ const CameraScreen = () => {
     useCameraPermission()
 
   const [mediaLibraryPermissionResponse, requestMediaLibraryPermission] =
-    MediaLibrary.usePermissions({ granularPermissions: ['photo'] })
+    useMediaLibraryPermissions()
 
   const camera = useRef<Camera>(null)
 
@@ -108,10 +112,7 @@ const CameraScreen = () => {
           marginBottom: 60
         }}
       >
-        <NavigationButton
-          onPress={() => console.log('Gallery not implemented yet')}
-          icon="image-album"
-        />
+        <NavigationButton onPress={() => router.push('/gallery')} icon="image-album" />
 
         <ShutterButton onShutterPress={onShutterPress} isPressed={isTakingPicture} />
 
