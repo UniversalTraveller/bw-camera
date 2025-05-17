@@ -9,6 +9,7 @@ import { router } from 'expo-router'
 
 import { useAppTheme } from '../theme/appTheme'
 import { useAppSelector } from '../store/hooks'
+import useMediaLibraryPermissions from '../hooks/useMediaLibraryPermissions'
 import ShutterButton from '../components/ShutterButton'
 import NavigationButton from '../components/NavigationButton'
 import ScreenView from '../components/ScreenView'
@@ -30,7 +31,7 @@ const CameraScreen = () => {
     useCameraPermission()
 
   const [mediaLibraryPermissionResponse, requestMediaLibraryPermission] =
-    MediaLibrary.usePermissions({ granularPermissions: ['photo'] })
+    useMediaLibraryPermissions()
 
   const camera = useRef<Camera>(null)
 

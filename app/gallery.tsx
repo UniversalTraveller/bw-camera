@@ -6,7 +6,9 @@ import * as MediaLibrary from 'expo-media-library'
 
 import { useAppTheme } from '../theme/appTheme'
 import ScreenView from '../components/ScreenView'
-import { ActivityIndicator } from 'react-native-paper'
+import { ActivityIndicator, Text } from 'react-native-paper'
+
+import useMediaLibraryPermissions from '../hooks/useMediaLibraryPermissions'
 
 const { width } = Dimensions.get('window')
 const NUMBER_OF_COLUMNS = 3
@@ -17,7 +19,11 @@ const GalleryScreen = () => {
   const [hasNextPage, setHasNextPage] = useState(true)
   const [endCursor, setEndCursor] = useState<string>()
   const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsErros] = useState(false)
   const { colors } = useAppTheme()
+
+  const [mediaLibraryPermissionResponse, requestMediaLibraryPermission] =
+    useMediaLibraryPermissions()
 
   const loadPhotos = async () => {
     if (isLoading || !hasNextPage) return
@@ -47,6 +53,10 @@ const GalleryScreen = () => {
   }
 
   useEffect(() => {
+    if (mediaLibraryPermissionResponse?.status !== 'granted') {
+      requestMediaLibraryPermission()
+    }
+
     loadPhotos()
   }, [])
 
@@ -60,6 +70,16 @@ const GalleryScreen = () => {
       }}
     />
   )
+
+  if (isError) {
+    return (
+      <ScreenView
+        style={{ alignItems: 'center', justifyContent: 'center', gap: 8, height: '100%' }}
+      >
+        <Text variant={'titleLarge'}>Error loading photos</Text>
+      </ScreenView>
+    )
+  }
 
   return (
     <ScreenView>
