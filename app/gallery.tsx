@@ -78,7 +78,11 @@ const GalleryScreen = () => {
   if (photos.length === 0) {
     return (
       <ScreenView style={{ alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-        <Text variant={'titleLarge'}>Nothing there to display yet</Text>
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <Text variant={'titleLarge'}>Nothing there to display yet</Text>
+        )}
       </ScreenView>
     )
   }
